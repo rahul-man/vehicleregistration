@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h2 align="center">Registration Form</h2>
+            <div class="errors" id="errors"></div>
+            <form method="post" id="registerForm" th:action="@{/newRegistration}" th:object="${customer}">
+                <div class="form-row my-3">
+                    <div class="col-md-6 form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" th:field="*{name}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="vehicleType">Vehicle Type</label>
+                        <select id="vehicleType" name="vehicleType" class="form-control" th:field="*{vehicleType}">
+                            <option value="Two Wheeler">Two Wheeler</option>
+                            <option value="Four Wheeler">Four Wheeler</option>
+                            <option value="Three Wheeler">Three Wheeler</option>
+                            <option value="Heavy Vehicle">Heavy Vehicle</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="address">Address</label>
+                        <input id="address" name="address" type="text" class="form-control" th:field="*{address}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="engineNo">Engine No</label>
+                        <input id="engineNo" name="engineNo" type="text" class="form-control" th:field="*{engineNo}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="gender">Gender</label>
+                        <input id="gender" name="gender" type="text" class="form-control" th:field="*{gender}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="model">Model</label>
+                        <input type="text" id="model" name="model" class="form-control" th:field="*{model}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" class="form-control" th:field="*{age}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="make">Make</label>
+                        <input type="text" id="make" name="make" class="form-control" th:field="*{make}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="RTOOffice">RTO Office</label>
+                        <select id="RTOOffice" name="RTOOffice" class="form-control" th:field="*{rtoOffice}">
+                            <option value="Chennai">Chennai</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Bangalore">Bangalore</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="DLNumber">DL Number</label>
+                        <input type="text" id="DLNumber" name="DLNumber" class="form-control" th:field="*{license}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="insuranceNumber">Insurance Number</label>
+                        <input type="text" id="insuranceNumber" name="insuranceNumber" class="form-control"
+                               th:field="*{insuranceNo}">
+                    </div>
+
+                </div>
+                <button type="submit" id="register" name="register" class="btn btn-success btn-block mt-3">Register
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

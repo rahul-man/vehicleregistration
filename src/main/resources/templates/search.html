@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Requests</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<h2>Search Requests</h2>
+<div id="searchRequest" class="container">
+    <form id="searchCustomerForm" method="post" th:action="@{/adminHome}" th:object="${customer}">
+        <div id="statusDiv" class="col-md-6 form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" class="form-control" th:field="*{status}">
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+        </div>
+        <div id="RTOOfficeDiv" class="col-md-6 form-group">
+            <label for="RTOOffice">RTO Office:</label>
+            <select id="RTOOffice" class="form-control" name="RTOOffice" th:field="*{rtoOffice}">
+                <option value="Chennai">Chennai</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Pune">Pune</option>
+                <option value="Bangalore">Bangalore</option>
+            </select>
+        </div>
+        <button type="submit" id="search" name="search" class="btn btn-primary">Search</button>
+    </form>
+</div>
+<div class="errors" id="errors" th:text="${msg}"></div>
+<div class="wrapper">
+    <div th:if="${not#lists.isEmpty(customers)}">
+        <table class="table table-sm table-striped table-bordered mt-3">
+            <thead class="table-success">
+            <tr>
+                <th>Request ID</th>
+                <th>Name</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>RTO Office</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tr th:each="request, stats : ${customers}">
+                <td>
+                    <a th:id="'requestId' + ${stats.count}" th:href="@{/reqValidate(requestId=${request.requestId})}"
+                       th:text="${request.requestId}"></a>
+                </td>
+                <td th:id="'name' + ${stats.count}" th:text="${request.name}"></td>
+                <td th:id="'make' + ${stats.count}" th:text="${request.make}"></td>
+                <td th:id="'model' + ${stats.count}" th:text="${request.model}"></td>
+                <td th:id="'RTOOffice' + ${stats.count}" th:text="${request.rtoOffice}"></td>
+                <td th:id="'status' + ${stats.count}" th:text="${request.status}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

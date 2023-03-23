@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Requests</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="wrapper">
+    <h2>My Requests</h2>
+    <div th:if="${requests.isEmpty()}">
+        <div class="errors" id="errors" th:text="${msg}"></div>
+    </div>
+    <div th:if="${not#lists.isEmpty(requests)}">
+        <table class="table table-sm table-striped table-bordered table-condensed">
+            <thead class="table-success">
+            <tr>
+                <th>Request ID</th>
+                <th>Name</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>RTO Office</th>
+                <th>Plate</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+
+            <tr th:each="request, stats : ${requests}">
+                <td th:id="'requestId' + ${stats.count}" th:text="${request.requestId}"></td>
+                <td th:id="'name' + ${stats.count}" th:text="${request.name}"></td>
+                <td th:id="'make' + ${stats.count}" th:text="${request.make}"></td>
+                <td th:id="'model' + ${stats.count}" th:text="${request.model}"></td>
+                <td th:id="'RTOOffice' + ${stats.count}" th:text="${request.rtoOffice}"></td>
+                <td th:id="'plateNo' + ${stats.count}" th:text="${request.plateNo}"></td>
+                <td th:id="'status' + ${stats.count}" th:text="${request.status}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

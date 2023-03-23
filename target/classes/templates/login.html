@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Log in</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<div class="container">
+    <div style="width:500px;margin-left: auto;margin-right: auto;margin-top:24px;padding: 24px;">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-user"></i>Login
+            </div>
+            <div class="card-block" style="padding: 24px;">
+                <div class="errors" id="errors" th:if="${error!=null}"
+                     th:text="${error}"></div>
+                <form id="loginForm" name="loginForm" th:action="@{/login}" method="post">
+                    <div class="form-group">
+                        <label for="userID">User ID</label>
+                        <input type="text" class="form-control" id="userID" name="userID"
+                               min="8" max="16" placeholder="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                               min="8" max="16" placeholder="password">
+                    </div>
+
+                    <div class="form-actions" style="margin-top: 12px;">
+                        <button type="submit" id="login" class="btn btn-success btn-block">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

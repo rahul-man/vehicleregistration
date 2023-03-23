@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Requests Page</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h2>View Requests</h2>
+            <div class="errors" id="errors" th:text="${msg}"></div>
+            <form id="myForm" method="post" th:action="@{/reqValidate}" th:object="${customer}">
+                <input type="hidden" th:field="*{requestId}"/>
+                <div class="form-row my-3">
+                    <div class="col-md-6 form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" class="form-control" name="name" readonly
+                               th:value="${customer.name}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">Vehicle Type:</label>
+                        <input type="text" id="vehicleType" class="form-control" name="vehicleType" readonly
+                               th:value="${customer.vehicleType}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">Address:</label>
+                        <input type="text" id="address" class="form-control" name="address" readonly
+                               th:value="${customer.address}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">Engine No:</label>
+                        <input type="text" id="engineNo" class="form-control" name="engineNo" readonly
+                               th:value="${customer.engineNo}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">Gender:</label>
+                        <input type="text" id="gender" class="form-control" name="gender" readonly
+                               th:value="${customer.gender}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">Model:</label>
+                        <input type="text" id="model" class="form-control" name="model" readonly
+                               th:value="${customer.model}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">Age:</label>
+                        <input type="text" id="age" class="form-control" name="age" readonly th:value="${customer.age}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">Make:</label>
+                        <input type="text" id="make" name="make" class="form-control" readonly
+                               th:value="${customer.make}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">RTO Office:</label>
+                        <input type="text" id="RTOOffice" class="form-control" name="RTOOffice" readonly
+                               th:value="${customer.rtoOffice}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">DL Number:</label>
+                        <input type="text" id="DLNumber" class="form-control" name="license" readonly
+                               th:value="${customer.license}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">Insurance Policy Number:</label>
+                        <input type="text" id="insuranceNumber" class="form-control" name="insuranceNo" readonly
+                               th:value="${customer.insuranceNo}">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="name">Plate No:</label>
+                        <input type="text" id="plateNo" class="form-control" name="plateNo" readonly
+                               th:value="${customer.plateNo==null} ? ${customer.plateNo} : ${plate}">
+                    </div>
+                </div>
+                <div class="buttonAction">
+                    <button type="submit" id="approve" name="save" class="btn btn-success mt-3">
+                        Approve
+                    </button>
+                    <button type="submit" id="reject" name="cancel" class="btn btn-success mt-3">
+                        Reject
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
