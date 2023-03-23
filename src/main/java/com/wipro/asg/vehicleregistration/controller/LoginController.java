@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
-
     @GetMapping("/login")
     public String processLogin(@RequestParam(value = "error", required = false) String error, Model model) {
         String errorMessage = null;
         if (error != null) {
-            LOGGER.error("Unauthorized: Invalid Credentials");
+            log.info("Unauthorized: Invalid Credentials");
             errorMessage = "Invalid Input";
         }
         model.addAttribute("error", errorMessage);

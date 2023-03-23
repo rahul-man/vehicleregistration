@@ -21,9 +21,6 @@ import javax.validation.Valid;
 @Slf4j
 @Controller
 public class CustomerController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
-
     private final CustomerService customerService;
 
     @Autowired
@@ -45,11 +42,11 @@ public class CustomerController {
 
         if (errors.hasErrors()) {
             response.setStatus("error");
-            LOGGER.error("Error making request: Bad Request{}", customer);
+            log.info("Error making request: Bad Request{}", customer);
             return ResponseEntity.badRequest().body(response);
         }
         customerService.registerCustomer(customer);
-        LOGGER.info("Successfully registered the customer");
+        log.info("Successfully registered the customer");
         response.setStatus("success");
         return ResponseEntity.ok(response);
     }

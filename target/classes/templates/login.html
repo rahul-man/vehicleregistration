@@ -13,8 +13,7 @@
                 <i class="fa fa-user"></i>Login
             </div>
             <div class="card-block" style="padding: 24px;">
-                <div class="errors" id="errors" th:if="${error!=null}"
-                     th:text="${error}"></div>
+                <div class="errors" id="errors" th:if="${error!=null}" th:text="${error}"></div>
                 <form id="loginForm" name="loginForm" th:action="@{/login}" method="post">
                     <div class="form-group">
                         <label for="userID">User ID</label>

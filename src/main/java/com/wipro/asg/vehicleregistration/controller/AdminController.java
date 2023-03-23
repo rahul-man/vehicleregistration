@@ -22,9 +22,6 @@ import static com.wipro.asg.vehicleregistration.model.constants.Constants.DECLIN
 @Slf4j
 @Controller
 public class AdminController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
-
     private final AdminService adminService;
 
     @Autowired
@@ -41,10 +38,10 @@ public class AdminController {
     @RequestMapping(value = "/adminHome", method = RequestMethod.POST)
     public String searchRequest(@RequestParam("status") String status, @RequestParam("rtoOffice") String rtoOffice,
                                 RedirectAttributes redirectAttributes) {
-        LOGGER.info("Fetching Customer by Status[{}], RTO[{}]", status, rtoOffice);
+        log.info("Fetching Customer by Status[{}], RTO[{}]", status, rtoOffice);
         List<Customer> customers = adminService.fetchRequest(status, rtoOffice);
         if (customers.isEmpty()) {
-            LOGGER.info("No records found for the customer with Status[{}], RTO[{}]", status, rtoOffice);
+            log.info("No records found for the customer with Status[{}], RTO[{}]", status, rtoOffice);
             redirectAttributes.addFlashAttribute("msg", "No records found");
         }
         redirectAttributes.addFlashAttribute("customers", customers);

@@ -2,6 +2,7 @@ package com.wipro.asg.vehicleregistration.service;
 
 import com.wipro.asg.vehicleregistration.model.Customer;
 import com.wipro.asg.vehicleregistration.repository.CustomerRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import java.util.stream.Collectors;
 
 import static com.wipro.asg.vehicleregistration.model.constants.Constants.*;
 
+
+@Slf4j
 @Service
 public class AdminService {
 
@@ -30,9 +33,11 @@ public class AdminService {
     }
 
     public Customer saveAdminApproval(Customer customer) {
+        log.info("Fetching customer by request id: {}", customer.getRequestId() );
         Customer fetchedCustomer = customerRepository.findByRequestId(customer.getRequestId());
         String plateNo = fetchedCustomer.getPlateNo().replace("-", "");
         String rtoOffice = fetchedCustomer.getRtoOffice();
+        log.info("Plate number {} and RtoOffice {} for customer with customer id {} are: ", plateNo, rtoOffice, customer.getRequestId());
         String format = "%s-%s";
         if ("Chennai".equals(rtoOffice)) {
             plateNo = String.format(format, CHENNAI.getCode(), generatePlateNo());
@@ -47,10 +52,12 @@ public class AdminService {
         }
         if (StringUtils.isEmpty(plateNo)) {
             fetchedCustomer.setPlateNo(plateNo);
+            log.info("Saving customer details when new plateNo {} is generated", plateNo);
             customerRepository.save(fetchedCustomer);
         } else {
             fetchedCustomer.setPlateNo(plateNo);
             fetchedCustomer.setStatus(APPROVED.getCode());
+            log.info("Saving customer details after approving plate no {}", plateNo);
             customerRepository.save(fetchedCustomer);
         }
         return fetchedCustomer;
@@ -60,6 +67,7 @@ public class AdminService {
         Customer fetchedCustomer = customerRepository.findByRequestId(customer.getRequestId());
         fetchedCustomer.setPlateNo("-");
         fetchedCustomer.setStatus(DECLINED.getCode());
+        log.info("Saving customer details after declining customer request");
         customerRepository.save(fetchedCustomer);
         return fetchedCustomer;
     }
